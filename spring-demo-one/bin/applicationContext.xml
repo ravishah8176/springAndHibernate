@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- load properties files -->
+    <context:property-placeholder location="classpath:sports.properties"/>
+
+	<!-- define your bean -->
+ 	<bean id="myFortuneService" class="com.ravi.springdemoOne.HappyFortuneService"></bean>
+ 	
+ 	<!-- setter dependency configuration -->
+ 	<bean id="myCricketCoach"
+ 		class="com.ravi.springdemoOne.CricketCoach">
+ 		
+ 		<property name="fortuneService" ref="myFortuneService"></property>
+ 		<property name="emailAddress" value="${email}"></property>
+ 		<property name="teamName" value="${team}"></property>
+ 		
+ 	</bean>
+ 	
+ 	<!-- define your dependency here -->
+ 	<bean id="baseballCoach" 
+ 		class="com.ravi.springdemoOne.BaseballCoach" >
+ 		<constructor-arg ref="myFortuneService" />
+ 	</bean>
+ 	  
+    <bean id="myCoach" 
+    	class="com.ravi.springdemoOne.BasketballCoach">
+    </bean>
+    
+    <bean id="hockeyCoach" 
+    	class="com.ravi.springdemoOne.HockeyCoach">
+    </bean>
+    
+    
+</beans>
+
+
+
+
+
